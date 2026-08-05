@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Genesis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicion.png" type="image/x-icon">
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="app-header-container">
+            <header class="app-header">
+                <h1>QR Genesis</h1>
+                <p class="subtitle">Free QRs for life, say thanks to Niranjan</p>
+            </header>
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i data-lucide="sun" class="sun-icon"></i>
+                <i data-lucide="moon" class="moon-icon"></i>
+            </button>
+        </div>
+
+        <div class="main-card">
+            <form id="qr-form">
+                <div class="form-group">
+                    <label for="data">
+                        <span>QR Data(issi ka qr banega)</span>
+                        <span style="font-size: 12px; font-weight: 400; color: var(--text-muted);">Max 1000 characters</span>
+                    </label>
+                    <textarea
+                        id="data"
+                        name="data"
+                        placeholder="https://example.com, name@email.com, +1 555 123 4567..."
+                        maxlength="1000"
+                        required
+                    ></textarea>
+                    <div class="type-badge" id="type-badge"></div>
+                </div>
+
+                <div class="options-grid">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="fill_color">Foreground</label>
+                        <div class="color-control-box" onclick="document.getElementById('fill_color').click()">
+                            <div class="color-label-group">
+                                <span>Code</span>
+                                <span class="hex-display" id="fill-hex">#111110</span>
+                            </div>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="fill_color" name="fill_color" value="#111110">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="back_color">Background</label>
+                        <div class="color-control-box" onclick="document.getElementById('back_color').click()">
+                            <div class="color-label-group">
+                                <span>Canvas</span>
+                                <span class="hex-display" id="back-hex">#FFFFFF</span>
+                            </div>
+                            <div class="color-input-wrapper">
+                                <input type="color" id="back_color" name="back_color" value="#ffffff">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="generate-btn" class="btn-primary">
+                    <i data-lucide="qr-code" style="width: 18px; height: 18px;"></i>
+                    <span>Generate QR Code (Sach mein?)</span>
+                </button>
+            </form>
+
+            <div id="error-msg" class="error"></div>
+
+            <div class="result-container" id="result-container">
+                <div class="preview-heading">Generated Result ()</div>
+                
+                <div id="loading-state">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Building QR matrix...</div>
+                </div>
+
+                <div class="qr-result" id="qr-result">
+                    <div id="qr-image"></div>
+                    <div style="margin-top: 16px;">
+                        <a id="download-btn" class="download-btn" download="qrcode.png">
+                            <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                            <span>PNG Download kar lo</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@master/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
